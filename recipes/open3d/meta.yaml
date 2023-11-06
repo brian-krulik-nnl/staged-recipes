@@ -1,0 +1,97 @@
+{% set name = "Open3D" %}
+{% set version = "0.17.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/isl-org/Open3D/archive/v{{ version }}.tar.gz
+  sha256: a7526efaf54434c4d54276fa0ddc63a1555401c30fb10fec9efa3241326bdd27
+
+build:
+  entry_points:
+    - open3d = @PYPI_PACKAGE_NAME@.tools.cli:main
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.7
+    - ipywidgets >=7.6.0
+    - pygments >=2.7.4
+    - jupyter_packaging >=0.10,<1.dev0
+    - jupyterlab >=3.0.0,==3.*
+    - setuptools >=40.8.0
+    - wheel
+    - pip
+  run:
+    - python >=3.7
+    - numpy >=1.18.0
+    - dash >=2.6.0
+    - werkzeug >=2.2.3
+    - nbformat ==5.7.0
+    - configargparse
+
+test:
+  imports:
+    - open3d
+  commands:
+    - pip check
+    - open3d --help
+  requires:
+    - pip
+
+about:
+  home: '@PROJECT_HOMEPAGE_URL@'
+  license: BSD-3-Clause AND Apache-2.0 AND BSD-2-Clause AND MIT
+  license_file:
+    - LICENSE
+    - 3rdparty/assimp/LICENSE
+    - 3rdparty/azure_kinect/LICENSE
+    - 3rdparty/benchmark/LICENSE
+    - 3rdparty/boringssl/LICENSE
+    - 3rdparty/civetweb/LICENSE
+    - 3rdparty/cub/LICENSE
+    - 3rdparty/curl/LICENSE
+    - 3rdparty/cutlass/LICENSE
+    - 3rdparty/dirent/LICENSE
+    - 3rdparty/eigen/LICENSE
+    - 3rdparty/embree/LICENSE
+    - 3rdparty/filament/LICENSE
+    - 3rdparty/fmt/LICENSE
+    - 3rdparty/glew/LICENSE
+    - 3rdparty/glfw/COPYING.txt
+    - 3rdparty/glfw/LICENSE
+    - 3rdparty/googletest/LICENSE
+    - 3rdparty/imgui/LICENSE
+    - 3rdparty/ippicv/LICENSE
+    - 3rdparty/jsoncpp/LICENSE
+    - 3rdparty/libjpeg-turbo/LICENSE
+    - 3rdparty/liblzf/LICENSE
+    - 3rdparty/libpng/LICENSE
+    - 3rdparty/librealsense/LICENSE
+    - 3rdparty/mkl/LICENSE
+    - 3rdparty/msgpack/LICENSE
+    - 3rdparty/nanoflann/LICENSE
+    - 3rdparty/openblas/LICENSE
+    - 3rdparty/parallelstl/LICENSE
+    - 3rdparty/possionrecon/LICENSE
+    - 3rdparty/pybind11/LICENSE
+    - 3rdparty/qhull/LICENSE
+    - 3rdparty/rply/LICENSE
+    - 3rdparty/stdgpu/LICENSE
+    - 3rdparty/tinyfiledialogs/LICENSE
+    - 3rdparty/tinygltf/LICENSE
+    - 3rdparty/tinyobjloader/LICENSE
+    - 3rdparty/tomasakeninemoeller/LICENSE
+    - 3rdparty/vtk/Copyright.txt
+    - 3rdparty/webrtc/LICENSE
+    - 3rdparty/zeromq/LICENSE
+    - 3rdparty/zlib/LICENSE
+    - python/LICENSE.txt
+
+extra:
+  recipe-maintainers:
+    - brian-krulik-nnl
